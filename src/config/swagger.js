@@ -15,8 +15,12 @@ const options = {
     },
     servers: [
       {
-        url: process.env.API_URL || "http://localhost:3000",
-        description: "Development Server",
+        url: "https://devpulse-api-5y0k.onrender.com",
+        description: "Production Server (Render)",
+      },
+      {
+        url: "http://localhost:3000",
+        description: "Development Server (Local)",
       },
     ],
     components: {
@@ -25,28 +29,41 @@ const options = {
           type: "http",
           scheme: "bearer",
           bearerFormat: "JWT",
-          description: "Cơ chế xác thực JWT qua header Authorization (nếu có kích hoạt). Ví dụ: 'Bearer <token>'",
+          description:
+            "Cơ chế xác thực JWT qua header Authorization (nếu có kích hoạt). Ví dụ: 'Bearer <token>'",
         },
         apiKeyAuth: {
           type: "apiKey",
           in: "header",
           name: "x-api-key",
-          description: "Cơ chế xác thực qua API Key trên header x-api-key (nếu có kích hoạt).",
+          description:
+            "Cơ chế xác thực qua API Key trên header x-api-key (nếu có kích hoạt).",
         },
       },
       schemas: {
         Resource: {
           type: "object",
-          required: ["_id", "title", "url", "category", "tags", "upvotes", "createdAt", "updatedAt"],
+          required: [
+            "_id",
+            "title",
+            "url",
+            "category",
+            "tags",
+            "upvotes",
+            "createdAt",
+            "updatedAt",
+          ],
           properties: {
             _id: {
               type: "string",
-              description: "Mã định danh duy nhất của tài nguyên (MongoDB ObjectId)",
+              description:
+                "Mã định danh duy nhất của tài nguyên (MongoDB ObjectId)",
               example: "65f2d01a9b1c8e001f3e4a5b",
             },
             title: {
               type: "string",
-              description: "Tiêu đề tài nguyên (tối thiểu 3 ký tự, tối đa 100 ký tự)",
+              description:
+                "Tiêu đề tài nguyên (tối thiểu 3 ký tự, tối đa 100 ký tự)",
               minLength: 3,
               maxLength: 100,
               example: "Lộ trình học ReactJS từ cơ bản đến nâng cao",
@@ -65,7 +82,8 @@ const options = {
             },
             tags: {
               type: "array",
-              description: "Danh sách thẻ phân loại (từ 1 đến 5 thẻ, không chứa ký tự đặc biệt, viết thường)",
+              description:
+                "Danh sách thẻ phân loại (từ 1 đến 5 thẻ, không chứa ký tự đặc biệt, viết thường)",
               items: {
                 type: "string",
                 maxLength: 20,
@@ -75,8 +93,10 @@ const options = {
             summary: {
               type: "string",
               maxLength: 300,
-              description: "Tóm tắt ngắn gọn nội dung tài nguyên (tối đa 300 ký tự)",
-              example: "Tài liệu chính thức và hướng dẫn thực hành React mới nhất.",
+              description:
+                "Tóm tắt ngắn gọn nội dung tài nguyên (tối đa 300 ký tự)",
+              example:
+                "Tài liệu chính thức và hướng dẫn thực hành React mới nhất.",
             },
             upvotes: {
               type: "integer",
@@ -125,7 +145,8 @@ const options = {
               type: "array",
               minItems: 1,
               maxItems: 5,
-              description: "Danh sách 1-5 tags, mỗi tag tối đa 20 ký tự, không ký tự đặc biệt",
+              description:
+                "Danh sách 1-5 tags, mỗi tag tối đa 20 ký tự, không ký tự đặc biệt",
               items: {
                 type: "string",
                 maxLength: 20,
@@ -135,8 +156,10 @@ const options = {
             summary: {
               type: "string",
               maxLength: 300,
-              description: "Mô tả ngắn gọn về tài nguyên (tùy chọn, tối đa 300 ký tự)",
-              example: "Tài liệu chính thức và hướng dẫn thực hành React mới nhất.",
+              description:
+                "Mô tả ngắn gọn về tài nguyên (tùy chọn, tối đa 300 ký tự)",
+              example:
+                "Tài liệu chính thức và hướng dẫn thực hành React mới nhất.",
             },
           },
         },
@@ -165,7 +188,8 @@ const options = {
           properties: {
             errors: {
               type: "array",
-              description: "Danh sách chi tiết các lỗi kiểm tra dữ liệu đầu vào (Zod validation)",
+              description:
+                "Danh sách chi tiết các lỗi kiểm tra dữ liệu đầu vào (Zod validation)",
               items: {
                 type: "object",
                 properties: {
